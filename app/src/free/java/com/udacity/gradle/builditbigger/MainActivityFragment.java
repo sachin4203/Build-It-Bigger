@@ -22,11 +22,11 @@ import sachin.com.jokesandroid.JokesActivity;
 
 public class MainActivityFragment extends Fragment implements OnTaskCompleted {
 
-    private String mResult = null;
-    private boolean testFlag = true;
-    private Button fetchJokeButton ;
     InterstitialAd mInterstitialAd;
     ProgressBar mProgressbar;
+    private String mResult = null;
+    private boolean testFlag = true;
+    private Button fetchJokeButton;
 
     public MainActivityFragment() {
     }
@@ -36,8 +36,8 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        fetchJokeButton = (Button)root.findViewById(R.id.fetch_joke_Button);
-        mProgressbar = (ProgressBar)root.findViewById(R.id.progressBar1);
+        fetchJokeButton = (Button) root.findViewById(R.id.fetch_joke_Button);
+        mProgressbar = (ProgressBar) root.findViewById(R.id.progressBar1);
         mProgressbar.setVisibility(View.INVISIBLE);
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
@@ -50,7 +50,7 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
             @Override
             public void onAdClosed() {
                 requestNewInterstitial();
-                if(mResult !=null && !testFlag) {
+                if (mResult != null && !testFlag) {
                     Intent next = new Intent(getActivity(), JokesActivity.class);
                     next.putExtra(JokesActivity.JOKE_INTENT, mResult);
                     getActivity().startActivity(next);
@@ -79,7 +79,7 @@ public class MainActivityFragment extends Fragment implements OnTaskCompleted {
 
     @Override
     public void OnTaskCompleted(String result) {
-        if(!testFlag) {
+        if (!testFlag) {
             if (mInterstitialAd.isLoaded()) {
                 mInterstitialAd.show();
             }
